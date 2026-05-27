@@ -1,0 +1,4 @@
+.sensor-node .subtle {
+  margin-top: 8rpx;
+  font-size: 22rpx;
+}

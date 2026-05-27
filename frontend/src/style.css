@@ -726,14 +726,34 @@ tbody tr:hover {
   }
 
   .sidebar {
+    gap: 14px;
+    padding: 14px 16px;
     border-right: 0;
     border-bottom: 1px solid var(--line);
+  }
+
+  .sidebar__brand p,
+  .sidebar__foot {
+    display: none;
+  }
+
+  .sidebar__nav {
+    display: flex;
+    gap: 10px;
+    overflow-x: auto;
+    padding-bottom: 4px;
+  }
+
+  .sidebar__link {
+    min-width: 180px;
+    padding: 12px 14px;
+    border-radius: 16px;
   }
 }
 
 @media (max-width: 720px) {
   .shell__main {
-    padding: 16px;
+    padding: 12px;
   }
 
   .topbar,
@@ -759,5 +779,34 @@ tbody tr:hover {
 
   .card--scene {
     min-height: 580px;
+  }
+
+  .topbar h1 {
+    font-size: 1.6rem;
+  }
+
+  .topbar__subtitle {
+    font-size: 0.92rem;
+  }
+
+  .topbar__meta {
+    min-width: 100%;
+  }
+
+  .sidebar__brand strong {
+    font-size: 1.12rem;
+  }
+
+  .sidebar__link {
+    min-width: 148px;
+  }
+
+  .chart-card__canvas {
+    height: 260px;
+  }
+
+  th,
+  td {
+    padding: 12px 10px;
   }
 }

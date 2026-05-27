@@ -1,0 +1,41 @@
+{
+  "pages": [
+    "pages/console/index",
+    "pages/dashboard/index",
+    "pages/history/index",
+    "pages/alarms/index"
+  ],
+  "window": {
+    "navigationBarTitleText": "智能制造车间监控",
+    "navigationBarBackgroundColor": "#eef2f6",
+    "navigationBarTextStyle": "black",
+    "backgroundColor": "#dfe4eb",
+    "backgroundTextStyle": "light"
+  },
+  "tabBar": {
+    "color": "#6b7787",
+    "selectedColor": "#28303a",
+    "backgroundColor": "#eef2f6",
+    "borderStyle": "black",
+    "list": [
+      {
+        "pagePath": "pages/console/index",
+        "text": "控制台"
+      },
+      {
+        "pagePath": "pages/dashboard/index",
+        "text": "总览"
+      },
+      {
+        "pagePath": "pages/history/index",
+        "text": "历史"
+      },
+      {
+        "pagePath": "pages/alarms/index",
+        "text": "告警"
+      }
+    ]
+  },
+  "style": "v2",
+  "sitemapLocation": "sitemap.json"
+}

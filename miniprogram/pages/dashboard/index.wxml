@@ -1,0 +1,73 @@
+<view class="page">
+  <view class="panel">
+    <text class="kicker">Workshop Overview</text>
+    <text class="title">车间总览</text>
+    <text class="subtle">最近采集时间：{{latestCollectTimeText}}</text>
+    <text class="subtle">当前告警点位：{{activeAlarmCount}}</text>
+    <button class="button button--ghost" loading="{{loading}}" bindtap="loadOverview">
+      {{loading ? '刷新中...' : '刷新总览'}}
+    </button>
+  </view>
+
+  <view class="panel">
+    <text class="section-title">九宫格点位状态</text>
+    <view class="workshop-board">
+      <view class="sensor-matrix">
+        <view
+          wx:for="{{sensors}}"
+          wx:key="sensorCode"
+          class="sensor-node {{selectedSensorCode === item.sensorCode ? 'sensor-node--selected' : ''}} {{item.alarmActive ? 'sensor-node--alarm' : ''}}"
+          data-code="{{item.sensorCode}}"
+          bindtap="selectSensor"
+        >
+          <view class="sensor-node__header">
+            <text class="sensor-node__code">{{item.sensorCode}}</text>
+            <text class="sensor-node__status">{{item.alarmActive ? '告警' : '正常'}}</text>
+          </view>
+          <text class="subtle">{{item.sensorName}}</text>
+          <view class="sensor-node__metrics">
+            <view class="metric-pill">温度 {{item.temperatureText}}</view>
+            <view class="metric-pill">湿度 {{item.humidityText}}</view>
+          </view>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <view wx:if="{{selectedSensor}}" class="panel">
+    <text class="section-title">点位详情</text>
+    <view class="record-card">
+      <text class="record-card__title">{{selectedSensor.sensorCode}} · {{selectedSensor.sensorName}}</text>
+      <view class="record-card__meta">
+        <view class="meta-item">
+          <text class="meta-item__label">网格位置</text>
+          <text class="meta-item__value">{{selectedSensor.gridPosition}}</text>
+        </view>
+        <view class="meta-item">
+          <text class="meta-item__label">状态</text>
+          <text class="meta-item__value">{{selectedSensor.alarmActive ? '告警中' : '正常'}}</text>
+        </view>
+        <view class="meta-item">
+          <text class="meta-item__label">温度</text>
+          <text class="meta-item__value">{{selectedSensor.temperatureText}}</text>
+        </view>
+        <view class="meta-item">
+          <text class="meta-item__label">湿度</text>
+          <text class="meta-item__value">{{selectedSensor.humidityText}}</text>
+        </view>
+        <view class="meta-item">
+          <text class="meta-item__label">更新时间</text>
+          <text class="meta-item__value">{{selectedSensor.collectTimeText}}</text>
+        </view>
+        <view class="meta-item">
+          <text class="meta-item__label">三维坐标</text>
+          <text class="meta-item__value">({{selectedSensor.x}}, {{selectedSensor.y}}, {{selectedSensor.z}})</text>
+        </view>
+      </view>
+      <view>
+        <text wx:for="{{selectedSensor.alarmTypes}}" wx:key="*this" class="tag tag--danger">{{item}}</text>
+        <text wx:if="{{selectedSensor.alarmTypes.length === 0}}" class="tag">无告警</text>
+      </view>
+    </view>
+  </view>
+</view>

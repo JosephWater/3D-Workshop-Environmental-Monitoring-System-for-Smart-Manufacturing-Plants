@@ -1,0 +1,33 @@
+<view class="page">
+  <view class="hero">
+    <text class="hero__kicker">Mini Program</text>
+    <text class="hero__title">智能制造工厂环境监控</text>
+    <text class="hero__desc">
+      小程序端通过 web-view 承载同一套 H5 页面，和 Web 端保持一致的控制台、三维总览、历史查询与告警查询能力。
+    </text>
+  </view>
+
+  <view class="panel">
+    <text class="panel__title">功能入口</text>
+    <view class="card-list">
+      <view wx:for="{{cards}}" wx:key="route" class="feature-card" bindtap="openFeature" data-route="{{item.route}}">
+        <text class="feature-card__title">{{item.title}}</text>
+        <text class="feature-card__desc">{{item.desc}}</text>
+      </view>
+    </view>
+  </view>
+
+  <view class="panel">
+    <text class="panel__title">部署说明</text>
+    <text class="tip">
+      1. 先把 H5 前端部署到 HTTPS 域名。
+    </text>
+    <text class="tip">
+      2. 将 utils/config.js 中的 H5_BASE_URL 改为实际地址。
+    </text>
+    <text class="tip">
+      3. 在微信开发者工具中打开 miniprogram 目录即可预览。
+    </text>
+    <text class="tip">当前 H5 地址占位：{{h5BaseUrl}}</text>
+  </view>
+</view>

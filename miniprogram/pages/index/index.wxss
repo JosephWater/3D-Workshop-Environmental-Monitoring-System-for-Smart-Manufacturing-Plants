@@ -1,0 +1,68 @@
+.page {
+  min-height: 100vh;
+  padding: 28rpx;
+  background: linear-gradient(180deg, #eef2f6 0%, #dfe4eb 100%);
+}
+
+.hero,
+.panel {
+  padding: 28rpx;
+  border: 1rpx solid rgba(160, 172, 186, 0.48);
+  border-radius: 28rpx;
+  background: rgba(255, 255, 255, 0.86);
+  box-shadow: 0 18rpx 42rpx rgba(57, 66, 77, 0.08);
+}
+
+.panel {
+  margin-top: 24rpx;
+}
+
+.hero__kicker,
+.panel__title {
+  display: block;
+  font-size: 24rpx;
+  letter-spacing: 4rpx;
+  color: #6b7787;
+  text-transform: uppercase;
+}
+
+.hero__title {
+  display: block;
+  margin-top: 14rpx;
+  font-size: 44rpx;
+  line-height: 1.25;
+  color: #28303a;
+  font-weight: 700;
+}
+
+.hero__desc,
+.feature-card__desc,
+.tip {
+  display: block;
+  margin-top: 14rpx;
+  font-size: 28rpx;
+  line-height: 1.7;
+  color: #607080;
+}
+
+.card-list {
+  margin-top: 18rpx;
+}
+
+.feature-card {
+  padding: 24rpx;
+  border-radius: 24rpx;
+  background: linear-gradient(180deg, #f7f9fc 0%, #e3e8ef 100%);
+  border: 1rpx solid rgba(176, 186, 198, 0.7);
+}
+
+.feature-card + .feature-card {
+  margin-top: 18rpx;
+}
+
+.feature-card__title {
+  display: block;
+  font-size: 34rpx;
+  font-weight: 700;
+  color: #28303a;
+}

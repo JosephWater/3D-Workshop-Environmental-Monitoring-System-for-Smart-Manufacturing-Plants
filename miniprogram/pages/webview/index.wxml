@@ -1,0 +1,15 @@
+<view class="page">
+  <view class="tabbar">
+    <view
+      wx:for="{{tabs}}"
+      wx:key="key"
+      class="tabbar__item {{route === item.key ? 'tabbar__item--active' : ''}}"
+      data-route="{{item.key}}"
+      bindtap="switchTab"
+    >
+      {{item.label}}
+    </view>
+  </view>
+
+  <web-view src="{{src}}"></web-view>
+</view>

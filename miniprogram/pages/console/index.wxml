@@ -1,0 +1,104 @@
+<view class="page">
+  <view class="panel">
+    <text class="kicker">Console</text>
+    <text class="title">环境监控控制台</text>
+    <text class="subtle">支持数据导入、阈值配置和多维统计分析。</text>
+    <button class="button" loading="{{uploading}}" bindtap="chooseAndUploadFile">
+      {{uploading ? '导入中...' : '上传 CSV / Excel'}}
+    </button>
+    <button class="button button--ghost" loading="{{loading}}" bindtap="loadPageData" style="margin-top: 12rpx;">
+      {{loading ? '刷新中...' : '刷新控制台'}}
+    </button>
+  </view>
+
+  <view class="panel">
+    <text class="section-title">总览统计</text>
+    <view class="grid-2">
+      <view wx:for="{{summaryCards}}" wx:key="label" class="stat-card">
+        <text class="stat-card__label">{{item.label}}</text>
+        <text class="stat-card__value">{{item.value}}</text>
+        <text class="stat-card__hint">{{item.hint}}</text>
+      </view>
+    </view>
+    <text class="subtle">最近采集时间：{{latestCollectTimeText}}</text>
+    <text class="subtle">平均温度：{{avgTempText}} / 平均湿度：{{avgHumidityText}}</text>
+  </view>
+
+  <view class="panel">
+    <text class="section-title">阈值配置</text>
+    <view class="form-grid">
+      <view class="field">
+        <text class="field__label">温度下限</text>
+        <input class="input" type="digit" value="{{ruleForm.tempMin}}" data-field="tempMin" bindinput="bindInput" />
+      </view>
+      <view class="field">
+        <text class="field__label">温度上限</text>
+        <input class="input" type="digit" value="{{ruleForm.tempMax}}" data-field="tempMax" bindinput="bindInput" />
+      </view>
+      <view class="field">
+        <text class="field__label">湿度下限</text>
+        <input class="input" type="digit" value="{{ruleForm.humidityMin}}" data-field="humidityMin" bindinput="bindInput" />
+      </view>
+      <view class="field">
+        <text class="field__label">湿度上限</text>
+        <input class="input" type="digit" value="{{ruleForm.humidityMax}}" data-field="humidityMax" bindinput="bindInput" />
+      </view>
+    </view>
+    <view class="switch-row">
+      <text class="field__label">启用实时告警规则</text>
+      <switch checked="{{ruleForm.enabled}}" bindchange="toggleRule" />
+    </view>
+    <button class="button" loading="{{saving}}" bindtap="saveRule">
+      {{saving ? '保存中...' : '保存阈值'}}
+    </button>
+  </view>
+
+  <view class="panel">
+    <text class="section-title">传感器平均温度</text>
+    <view class="bar-list">
+      <view wx:for="{{sensorBars}}" wx:key="label" class="bar-row">
+        <text class="bar-row__label">{{item.label}}</text>
+        <view class="bar-track">
+          <view class="bar-fill" style="width: {{item.percent}}%;"></view>
+        </view>
+        <text class="bar-row__value">{{item.valueText}}</text>
+      </view>
+    </view>
+    <view wx:if="{{sensorBars.length === 0}}" class="empty">暂无可视化数据。</view>
+  </view>
+
+  <view class="panel">
+    <text class="section-title">告警类型分布</text>
+    <view class="bar-list">
+      <view wx:for="{{alarmBars}}" wx:key="label" class="bar-row">
+        <text class="bar-row__label">{{item.label}}</text>
+        <view class="bar-track">
+          <view class="bar-fill" style="width: {{item.percent}}%;"></view>
+        </view>
+        <text class="bar-row__value">{{item.valueText}}</text>
+      </view>
+    </view>
+    <view wx:if="{{alarmBars.length === 0}}" class="empty">暂无告警统计。</view>
+  </view>
+
+  <view class="panel">
+    <text class="section-title">来源文件数据量</text>
+    <view class="bar-list">
+      <view wx:for="{{sourceBars}}" wx:key="label" class="bar-row">
+        <text class="bar-row__label">{{item.label}}</text>
+        <view class="bar-track">
+          <view class="bar-fill" style="width: {{item.percent}}%;"></view>
+        </view>
+        <text class="bar-row__value">{{item.valueText}}</text>
+      </view>
+    </view>
+    <view wx:if="{{sourceBars.length === 0}}" class="empty">暂无文件来源统计。</view>
+  </view>
+
+  <view wx:if="{{lastImport}}" class="panel">
+    <text class="section-title">最近导入</text>
+    <text class="subtle">文件：{{lastImport.sourceFile}}</text>
+    <text class="subtle">导入条数：{{lastImport.importedRows}}</text>
+    <text class="subtle">新增告警：{{lastImport.newAlarmCount}}</text>
+  </view>
+</view>

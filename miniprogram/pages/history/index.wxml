@@ -1,0 +1,56 @@
+<view class="page">
+  <view class="panel">
+    <text class="section-title">筛选条件</text>
+    <view class="field">
+      <text class="field__label">传感器</text>
+      <picker mode="selector" range="{{sensorOptions}}" range-key="label" value="{{sensorIndex}}" bindchange="bindSensorChange">
+        <view class="picker">{{sensorOptions[sensorIndex].label}}</view>
+      </picker>
+    </view>
+    <view class="form-grid" style="margin-top: 16rpx;">
+      <view class="field">
+        <text class="field__label">开始日期</text>
+        <picker mode="date" value="{{startDate}}" bindchange="bindStartDate">
+          <view class="picker">{{startDate || '请选择开始日期'}}</view>
+        </picker>
+      </view>
+      <view class="field">
+        <text class="field__label">结束日期</text>
+        <picker mode="date" value="{{endDate}}" bindchange="bindEndDate">
+          <view class="picker">{{endDate || '请选择结束日期'}}</view>
+        </picker>
+      </view>
+    </view>
+    <button class="button" loading="{{loading}}" bindtap="loadHistory">
+      {{loading ? '查询中...' : '执行查询'}}
+    </button>
+  </view>
+
+  <view class="panel">
+    <text class="section-title">历史记录</text>
+    <view wx:if="{{rows.length === 0}}" class="empty">暂无符合条件的数据。</view>
+    <view wx:else class="record-list">
+      <view wx:for="{{rows}}" wx:key="id" class="record-card">
+        <text class="record-card__title">{{item.sensorCode}} · {{item.sensorName}}</text>
+        <view class="record-card__meta">
+          <view class="meta-item">
+            <text class="meta-item__label">温度</text>
+            <text class="meta-item__value">{{item.temperatureText}}</text>
+          </view>
+          <view class="meta-item">
+            <text class="meta-item__label">湿度</text>
+            <text class="meta-item__value">{{item.humidityText}}</text>
+          </view>
+          <view class="meta-item">
+            <text class="meta-item__label">采集时间</text>
+            <text class="meta-item__value">{{item.collectTimeText}}</text>
+          </view>
+          <view class="meta-item">
+            <text class="meta-item__label">来源文件</text>
+            <text class="meta-item__value">{{item.sourceFile}}</text>
+          </view>
+        </view>
+      </view>
+    </view>
+  </view>
+</view>

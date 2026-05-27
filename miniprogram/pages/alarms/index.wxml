@@ -1,0 +1,73 @@
+<view class="page">
+  <view class="panel">
+    <text class="section-title">筛选条件</text>
+    <view class="form-grid">
+      <view class="field">
+        <text class="field__label">传感器</text>
+        <picker mode="selector" range="{{sensorOptions}}" range-key="label" value="{{sensorIndex}}" data-field="sensorIndex" bindchange="bindPicker">
+          <view class="picker">{{sensorOptions[sensorIndex].label}}</view>
+        </picker>
+      </view>
+      <view class="field">
+        <text class="field__label">告警类型</text>
+        <picker mode="selector" range="{{typeOptions}}" range-key="label" value="{{typeIndex}}" data-field="typeIndex" bindchange="bindPicker">
+          <view class="picker">{{typeOptions[typeIndex].label}}</view>
+        </picker>
+      </view>
+      <view class="field">
+        <text class="field__label">告警状态</text>
+        <picker mode="selector" range="{{statusOptions}}" range-key="label" value="{{statusIndex}}" data-field="statusIndex" bindchange="bindPicker">
+          <view class="picker">{{statusOptions[statusIndex].label}}</view>
+        </picker>
+      </view>
+      <view class="field">
+        <text class="field__label">开始日期</text>
+        <picker mode="date" value="{{startDate}}" data-field="startDate" bindchange="bindDate">
+          <view class="picker">{{startDate || '请选择开始日期'}}</view>
+        </picker>
+      </view>
+      <view class="field">
+        <text class="field__label">结束日期</text>
+        <picker mode="date" value="{{endDate}}" data-field="endDate" bindchange="bindDate">
+          <view class="picker">{{endDate || '请选择结束日期'}}</view>
+        </picker>
+      </view>
+    </view>
+    <button class="button" loading="{{loading}}" bindtap="loadAlarms">
+      {{loading ? '查询中...' : '执行查询'}}
+    </button>
+  </view>
+
+  <view class="panel">
+    <text class="section-title">告警列表</text>
+    <view wx:if="{{rows.length === 0}}" class="empty">暂无符合条件的告警记录。</view>
+    <view wx:else class="record-list">
+      <view wx:for="{{rows}}" wx:key="id" class="record-card">
+        <text class="record-card__title">{{item.sensorCode}} · {{item.sensorName}}</text>
+        <view>
+          <text class="tag tag--danger">{{item.alarmType}}</text>
+          <text class="tag">{{item.status}}</text>
+          <text class="tag">{{item.alarmLevel}}</text>
+        </view>
+        <view class="record-card__meta">
+          <view class="meta-item">
+            <text class="meta-item__label">当前值</text>
+            <text class="meta-item__value">{{item.currentValue}}</text>
+          </view>
+          <view class="meta-item">
+            <text class="meta-item__label">阈值规则</text>
+            <text class="meta-item__value">{{item.thresholdDesc}}</text>
+          </view>
+          <view class="meta-item">
+            <text class="meta-item__label">告警时间</text>
+            <text class="meta-item__value">{{item.alarmTimeText}}</text>
+          </view>
+          <view class="meta-item">
+            <text class="meta-item__label">恢复时间</text>
+            <text class="meta-item__value">{{item.resolvedAtText}}</text>
+          </view>
+        </view>
+      </view>
+    </view>
+  </view>
+</view>

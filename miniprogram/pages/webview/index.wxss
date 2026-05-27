@@ -1,0 +1,28 @@
+.page {
+  min-height: 100vh;
+}
+
+.tabbar {
+  display: flex;
+  gap: 12rpx;
+  padding: 16rpx 20rpx;
+  background: #eef2f6;
+  border-bottom: 1rpx solid rgba(176, 186, 198, 0.7);
+}
+
+.tabbar__item {
+  flex: 1;
+  min-height: 64rpx;
+  line-height: 64rpx;
+  text-align: center;
+  font-size: 26rpx;
+  color: #5f6b7a;
+  border-radius: 18rpx;
+  background: #ffffff;
+}
+
+.tabbar__item--active {
+  color: #28303a;
+  font-weight: 700;
+  background: #dce5ef;
+}
